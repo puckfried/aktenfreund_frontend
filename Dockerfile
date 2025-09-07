@@ -7,13 +7,16 @@ WORKDIR /app
 COPY package*.json ./
 
 # Dependencies installieren
-RUN npm ci --only=production
+RUN npm ci
 
 # Source code kopieren
 COPY . .
 
 # React App bauen
 RUN npm run build
+
+# Dev-Dependencies entfernen
+RUN npm prune --production
 
 # Production stage mit einfachem HTTP Server
 FROM node:20-alpine
