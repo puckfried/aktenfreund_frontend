@@ -1,49 +1,22 @@
-import React, { useState } from 'react'
 import { useRef } from 'react';
 
 
-export default function UploadForm() {
+interface UploadFormProps {
+  handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>, uploader: React.RefObject<HTMLInputElement | null>) => void;
+  isUploading: boolean;
+}
 
-  const uploader = useRef<HTMLInputElement>(null);
-  const [isUploading, setIsUploading] = useState(false)
+export default function UploadForm(props: UploadFormProps) {
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setIsUploading(true)
+  const {handleFileUpload , isUploading} = props
+  const uploader                         = useRef<HTMLInputElement>(null);
 
-    try {
-      const formData= new FormData()
-      formData.append("file", file)
-
-      const res = await fetch(`http://localhost:8000/upload_data`, {
-        method: "POST",
-        body: formData,
-        credentials: "include"
-      })
-      const result = await res.json()
-      if (res.status !== 200){
-        throw new Error("Upload fehlgeschlagen")
-      }
-      console.log(result)
-      if (uploader.current) {
-        uploader.current.value = '';
-      }
-      setIsUploading(false)
-    } catch(e){
-      console.log(e)
-      setIsUploading(false)
-
-    }
-
-  };
 
 
   const activateInput = (e: React.DragEvent<HTMLFormElement>) => {
     e.preventDefault()
     const files = e.dataTransfer.files;
-    console.log(files)
-     if (files.length > 0 && uploader.current) {
+    if (files.length > 0 && uploader.current) {
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(files[0]);
       uploader.current.files = dataTransfer.files;
@@ -55,31 +28,34 @@ export default function UploadForm() {
 
   const handleDragOver = (e: React.DragEvent<HTMLFormElement>) => {
     e.preventDefault()
+
   }
 
 
 
 
   return (
+    <>
      <form 
-          className='border w-md p-6 h-[300px] rounded border-3 border-dashed border-gray-200 flex flex-col items-center justify-center '
+          className='border w-lg p-6 h-[400px] rounded border-5 border-dashed border-myred flex flex-col items-center justify-center '
           onDrop={activateInput}
           onDragOver={handleDragOver}
           >
-          <label
+          <label className='text-2xl underline cursor-pointer'
             htmlFor='file-upload'
-          >Die Pdf hier ablegen oder klicken</label>
+            >Die Pdf hier ablegen oder klicken</label>
           <input 
             id={"file-upload"}
             ref={uploader} 
             type="file" 
             accept='.pdf, application/pdf'
-            onChange={handleFileUpload} 
+            onChange={(e) => handleFileUpload(e, uploader)} 
             className='sr-only'
             aria-label='PDF-Datei auswählen'
             
             />
             {isUploading && <label>UPLOAD LÄUFT</label>}
         </form>
+    </>
   )
 }

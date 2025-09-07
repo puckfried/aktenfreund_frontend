@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useUser } from '../context/UserContext'
 
 export default function LoginForm() {
@@ -17,7 +17,7 @@ export default function LoginForm() {
         
         <label htmlFor="username" className='mt-6'>E-Mail</label>
         <input 
-            type="text" 
+            type="email" 
             id="username"
             onChange={(e) => setName(e.target.value)}
             value={name} 

@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useState, useContext, createContext, type ReactNode, type FormEvent, useEffect } from "react"
+import { useMessage } from "./MessageContext"
 
 
 interface UserData{
@@ -27,6 +28,7 @@ const url = "http://localhost:8000"
 export function UserContextProvider({children} : UserContextProviderProps){
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false)
     const [userData, setUserData] = useState<UserData>({})
+    const {createMessage} = useMessage()
 
     async function fetchUser(){
         try{
@@ -34,6 +36,7 @@ export function UserContextProvider({children} : UserContextProviderProps){
             const result = await res.json()
             if (res.status === 200){
                 setUserData(result)
+                createMessage({error: false, message: "Willkommen, Sie sind jetzt eingeloggt"})
             }
         } catch(e){
             console.log("Kein Cookie", e)
@@ -58,7 +61,7 @@ export function UserContextProvider({children} : UserContextProviderProps){
             })
             const data = await res.json()
             if (res.status !== 200) {
-                throw new Error(data.message || "Something went wrong" )
+                throw new Error(data.detail || "Fehler mit den Zugangsdaten" )
             }
             setUserData(data || {})
             return true
@@ -68,8 +71,9 @@ export function UserContextProvider({children} : UserContextProviderProps){
             
         } catch(error){
             setUserIsLoggedIn(false)
-            console.log("FEHLER",error)
-            // Error handling routine here return false wen error in login gehandelt wird, oder starte globales error handling
+            if (error instanceof Error) 
+                createMessage({error: true, message: String(error.message)})
+          
             return false
         }
     }
@@ -80,8 +84,10 @@ export function UserContextProvider({children} : UserContextProviderProps){
             const result = await res.json()
             if (res.status !==200) new Error(result.message)
             setUserData({})
-        }catch(e){
-            console.log(e)
+            createMessage({error: false, message: result.detail})
+        }catch(error){
+            if (error instanceof Error) 
+                createMessage({error: true, message: String(error.message)})
         }
     }
 

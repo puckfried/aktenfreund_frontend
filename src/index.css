@@ -1,5 +1,38 @@
 @import "tailwindcss";
 
+@theme {
+  --color-myred: #e7876f;
+  --color-mygreen: #788475;
+}
+
+
+@font-face {
+  font-family: "CrimsonPro";
+  src: url("/fonts/Crimson_Pro/CrimsonPro-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background-color: oklch(26.6% 0.065 152.934) ;
+}
+
+.myFont {
+  font-family: "CrimsonPro", "serif";
+}
+
+.bg {
+  background-color: #788475;
+}
+
+.bg-egg{
+  background-color: #453643;
+}
+
+.bg-egg:hover{
+  background-color: #28112b;
+}
 
 /* @font-face {
     font-family: "Buenard";
@@ -40,31 +73,3 @@
     font-style: normal;
     font-display: swap;
 } */
-
-@font-face {
-  font-family: "CrimsonPro";
-  src: url("fonts/Crimson_Pro/CrimsonPro-VariableFont_wght.ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-body {
-  background-color: oklch(26.6% 0.065 152.934) ;
-}
-
-.myFont {
-  font-family: "CrimsonPro", "serif";
-}
-
-.bg {
-  background-color: #788475;
-}
-
-.bg-egg{
-  background-color: #453643;
-}
-
-.bg-egg:hover{
-  background-color: #28112b;
-}
