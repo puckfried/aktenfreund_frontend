@@ -30,7 +30,7 @@ RUN npm install -g serve
 COPY --from=builder /app/dist ./dist
 
 # Port exponieren
-EXPOSE 3000
+EXPOSE 3001
 
 # Statische Dateien servieren
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "3001"]
