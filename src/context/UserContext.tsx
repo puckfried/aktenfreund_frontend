@@ -22,7 +22,7 @@ interface UserContextProviderProps {
 
 
 export const UserContext = createContext<UserContextType | undefined>(undefined)
-const url = "http://localhost:8000"
+const url = "https://api.aktenfreun.de"
 
 
 export function UserContextProvider({children} : UserContextProviderProps){

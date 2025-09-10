@@ -31,7 +31,7 @@ export function useMistral(){
       const formData= new FormData()
       formData.append("file", file)
 
-      const res = await fetch(`http://localhost:8000/upload_data`, {
+      const res = await fetch(`https://api.aktenfreun.de/upload_data`, {
         method: "POST",
         body: formData,
         credentials: "include"
