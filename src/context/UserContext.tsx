@@ -46,7 +46,6 @@ export function UserContextProvider({children} : UserContextProviderProps){
 
     useEffect(() => {
       fetchUser()   
-      console.log("hallo Frontend")
     },[])
     
     async function userHandleLogin(e: FormEvent, email: string, password: string){
