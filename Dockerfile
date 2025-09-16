@@ -6,6 +6,9 @@ WORKDIR /app
 # Package files kopieren
 COPY package*.json ./
 
+ARG VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
 # Dependencies installieren
 RUN npm ci
 

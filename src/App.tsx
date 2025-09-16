@@ -16,10 +16,10 @@ function App() {
 
   return (
     <div className='min-h-screen flex flex-col text-gray-200 '>
-    <header className='p-8 flex justify-between items-center'>
+    <header className='p-10 flex justify-between items-center'>
         <div className='flex items-center gap-10'>
           <img src={icon} alt="Aktenfreund Icon" className='h-20'/>          
-          <h1 className='text-gray-200 text-7xl myFont font-medium'>Aktenfreun.de</h1>
+          <h1 className='text-gray-200 text-5xl myFont font-medium'>Aktenfreun.de</h1>
 
         </div>
         <button className='cursor-pointer' onClick={userHandleLogout}>

@@ -37,13 +37,13 @@ export default function UploadForm(props: UploadFormProps) {
   return (
     <>
      <form 
-          className='border w-lg p-6 h-[400px] rounded border-5 border-dashed border-myred flex flex-col items-center justify-center '
+          className='border w-xs md:w-lg p-6 h-[400px] rounded border-5 border-dashed border-myred flex flex-col items-center justify-center '
           onDrop={activateInput}
           onDragOver={handleDragOver}
           >
-          <label className='text-2xl underline cursor-pointer'
+          <label className='md:text-2xl underline cursor-pointer'
             htmlFor='file-upload'
-            >Die Pdf hier ablegen oder klicken</label>
+            >Die Pdf ablegen oder hier klicken</label>
           <input 
             id={"file-upload"}
             ref={uploader} 

@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { useMessage } from '../context/MessageContext';
 
+
 export function useMistral(){
+
+
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
 
   interface BlobData {
     filename: string
@@ -23,6 +27,7 @@ export function useMistral(){
   }
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, uploader: React.RefObject<HTMLInputElement | null>) => {
+    
     const file = event.target.files?.[0];
     if (!file) return;
     setIsUploading(true)
@@ -30,8 +35,8 @@ export function useMistral(){
     try {
       const formData= new FormData()
       formData.append("file", file)
-
-      const res = await fetch(`https://api.aktenfreun.de/upload_data`, {
+     
+      const res = await fetch(`${apiBaseUrl}/upload_data`, {
         method: "POST",
         body: formData,
         credentials: "include"

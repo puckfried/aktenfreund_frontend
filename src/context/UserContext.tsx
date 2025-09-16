@@ -3,6 +3,7 @@ import { useState, useContext, createContext, type ReactNode, type FormEvent, us
 import { useMessage } from "./MessageContext"
 
 
+
 interface UserData{
   id?: string
   username?: string
@@ -22,7 +23,8 @@ interface UserContextProviderProps {
 
 
 export const UserContext = createContext<UserContextType | undefined>(undefined)
-const url = "https://api.aktenfreun.de"
+
+const url = import.meta.env.VITE_API_BASE_URL
 
 
 export function UserContextProvider({children} : UserContextProviderProps){
